@@ -3,8 +3,14 @@
 	max-width: 640px;
 	margin: auto;
 	height: 100vh;
-}
-.messagesWrapper {
-}
-.messageInputWrapper {
+	.messagesWrapper {
+		padding: 0px 24px;
+	}
+	.messageInputWrapper {
+		height: 48px;
+		width: 100%;
+		position: absolute;
+		bottom: 0px;
+		left: 0px;
+	}
 }
