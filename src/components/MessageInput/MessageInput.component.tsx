@@ -1,13 +1,13 @@
-import React, { FormEvent, useRef, useState } from 'react';
+import React, { FormEvent, useState } from 'react';
 
 interface Props {
 	username: string;
 	fetchAllMessages: () => void;
+	messageRef: React.RefObject<HTMLInputElement>;
 }
 
-const MessageInput = ({ username, fetchAllMessages }: Props) => {
+const MessageInput = ({ username, fetchAllMessages, messageRef }: Props) => {
 	const [message, setmessage] = useState('');
-	const messageRef = useRef<HTMLInputElement>(null); //ref for messageRef
 
 	const sendNewMessage = async (message: string) => {
 		const rawResponse = await fetch('https://chatty.kubernetes.doodle-test.com/api/chatty/v1.0', {

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useRef, useState, useEffect } from 'react';
 import Message from '../Message/Message.component';
 import MessageInput from '../MessageInput/MessageInput.component';
 
@@ -17,10 +17,21 @@ interface Props {
 
 const Chat = ({ username }: Props) => {
 	const [messages, setmessages] = useState([]);
+	const messageRef = useRef<HTMLInputElement>(null); //ref for messageRef
+	const scrollArea = useRef<HTMLDivElement>(null); //ref for scrollArea
 
 	useEffect(() => {
 		fetchAllMessages();
 	}, []);
+
+	useEffect(() => {
+		if (messageRef.current !== null) {
+			messageRef.current.focus(); //focus on the messageRef after messages changed
+		}
+		if (scrollArea.current !== null) {
+			scrollArea.current.scrollTop = scrollArea.current.scrollHeight; //to scroll to the bottom after messages changed
+		}
+	}, [messages]);
 
 	const fetchAllMessages = async () => {
 		const rawResponse = await fetch('https://chatty.kubernetes.doodle-test.com/api/chatty/v1.0', {
@@ -37,13 +48,13 @@ const Chat = ({ username }: Props) => {
 
 	return (
 		<div className='chat'>
-			<div className='messagesWrapper'>
+			<div ref={scrollArea} className='messagesWrapper'>
 				{messages.map((message: MessageType) => (
 					<Message key={message._id} username={username} message={message} />
 				))}
 			</div>
 			<div className='messageInputWrapper'>
-				<MessageInput username={username} fetchAllMessages={fetchAllMessages} />
+				<MessageInput username={username} fetchAllMessages={fetchAllMessages} messageRef={messageRef} />
 			</div>
 		</div>
 	);
