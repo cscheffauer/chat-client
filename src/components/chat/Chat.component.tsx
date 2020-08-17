@@ -6,9 +6,12 @@ interface Props {
 }
 
 const Chat = ({ username }: Props) => {
+	const fetchAllMessages = () => {
+		alert('test');
+	};
 	return (
 		<div className='chat'>
-			<MessageInput username={username} />
+			<MessageInput username={username} fetchAllMessages={fetchAllMessages} />
 		</div>
 	);
 };
