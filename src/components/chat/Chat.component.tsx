@@ -7,7 +7,15 @@ interface Props {
 const Chat = ({ username }: Props) => {
 	const [message, setmessage] = useState('');
 	const messageRef = useRef<HTMLInputElement>(null); //ref for messageRef
-	const handleSubmit = () => {};
+
+	const sendNewMessage = (message: string) => {};
+	const handleSubmit = (event: FormEvent | KeyboardEvent) => {
+		event.preventDefault();
+		if (message.length > 0) {
+			setmessage('');
+			sendNewMessage(message); //send new message
+		}
+	};
 
 	const handleChange = (event: FormEvent<HTMLInputElement>) => {
 		event.preventDefault();
