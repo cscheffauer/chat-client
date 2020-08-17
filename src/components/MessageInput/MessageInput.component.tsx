@@ -36,7 +36,7 @@ const MessageInput = ({ username, fetchAllMessages }: Props) => {
 	};
 	return (
 		<form onSubmit={handleSubmit}>
-			<input ref={messageRef} placeholder={'Type your message here'} onChange={handleChange} value={message} type='text'></input>
+			<input ref={messageRef} placeholder={'Message'} onChange={handleChange} value={message} type='text'></input>
 			<button type='submit'>Send</button>
 		</form>
 	);
