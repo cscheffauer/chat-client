@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 import Message from '../Message/Message.component';
 import MessageInput from '../MessageInput/MessageInput.component';
 
+import './Chat.styles.scss';
+
 export type MessageType = {
 	_id: string;
 	message: string;
@@ -35,10 +37,14 @@ const Chat = ({ username }: Props) => {
 
 	return (
 		<div className='chat'>
-			{messages.map((message: MessageType) => (
-				<Message key={message._id} username={username} message={message} />
-			))}
-			<MessageInput username={username} fetchAllMessages={fetchAllMessages} />
+			<div className='messagesWrapper'>
+				{messages.map((message: MessageType) => (
+					<Message key={message._id} username={username} message={message} />
+				))}
+			</div>
+			<div className='messageInputWrapper'>
+				<MessageInput username={username} fetchAllMessages={fetchAllMessages} />
+			</div>
 		</div>
 	);
 };
