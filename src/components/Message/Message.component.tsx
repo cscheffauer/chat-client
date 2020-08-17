@@ -8,9 +8,9 @@ interface Props {
 const Message = ({ username, message }: Props) => {
 	return (
 		<div className='message'>
-			<p>
+			<span>
 				{message.author} {message.message} {message.timestamp}
-			</p>
+			</span>
 		</div>
 	);
 };
