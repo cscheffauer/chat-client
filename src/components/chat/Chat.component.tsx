@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Message from '../Message/Message.component';
 import MessageInput from '../MessageInput/MessageInput.component';
 
@@ -15,6 +15,11 @@ interface Props {
 
 const Chat = ({ username }: Props) => {
 	const [messages, setmessages] = useState([]);
+
+	useEffect(() => {
+		fetchAllMessages();
+	}, []);
+
 	const fetchAllMessages = async () => {
 		const rawResponse = await fetch('https://chatty.kubernetes.doodle-test.com/api/chatty/v1.0', {
 			method: 'GET',
@@ -27,6 +32,7 @@ const Chat = ({ username }: Props) => {
 		const messagesJson = await rawResponse.json();
 		setmessages(messagesJson);
 	};
+
 	return (
 		<div className='chat'>
 			{messages.map((message: MessageType) => (
