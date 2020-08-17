@@ -14,6 +14,7 @@ const Chat = ({ username }: Props) => {
 			headers: {
 				Accept: 'application/json',
 				'Content-Type': 'application/json',
+				token: '2v87a8V1ECW7',
 			},
 			body: JSON.stringify({ author: username, message: message }),
 		});
