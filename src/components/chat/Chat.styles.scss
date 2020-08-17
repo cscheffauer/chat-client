@@ -9,16 +9,39 @@
 		margin: auto;
 		overflow-y: auto;
 		flex: 1 1 auto;
-		.message {
-			padding-top: 16px;
-			padding-left: 24px;
-			max-width: 240px;
-			@media (min-width: 800px) {
-				max-width: 420px;
+		.messageLine {
+			width: 100%;
+			display: inline-block;
+			.message {
+				padding: 16px;
+				margin-left: 24px;
+				margin-right: 24px;
+				margin-bottom: 16px;
+				width: fit-content;
+				max-width: 240px;
+				background-color: #fff;
+				border: 1px solid rgb(193, 193, 193);
+				border-radius: 5px;
+				@media (min-width: 800px) {
+					max-width: 420px;
+				}
+				span {
+					display: block;
+					line-height: 25px;
+				}
+				.author {
+					color: rgb(193, 193, 193);
+				}
+				.ts {
+					color: rgb(193, 193, 193);
+				}
 			}
 			.own {
 				float: right;
-				padding-right: 24px;
+				background-color: rgb(252, 245, 200);
+				.ts {
+					float: right;
+				}
 			}
 		}
 	}
