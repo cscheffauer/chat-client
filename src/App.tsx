@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import './App.css';
-import Chat from './components/chat/Chat.component';
-import Login from './components/login/Login.component';
+import Chat from './components/Chat/Chat.component';
+import Login from './components/Login/Login.component';
 
 function App() {
 	const [loggedin, setloggedin] = useState(false);
