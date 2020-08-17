@@ -7,16 +7,16 @@
 		width: 100%;
 		max-width: 640px;
 		margin: auto;
+		padding-top: 16px;
 		overflow-y: auto;
 		flex: 1 1 auto;
+
 		.messageLine {
 			width: 100%;
 			display: inline-block;
 			.message {
 				padding: 16px;
-				margin-left: 24px;
-				margin-right: 24px;
-				margin-bottom: 16px;
+				margin: 0px 24px 16px 24px;
 				width: fit-content;
 				max-width: 240px;
 				background-color: #fff;
@@ -44,6 +44,10 @@
 				}
 			}
 		}
+	}
+	::-webkit-scrollbar {
+		width: 0px; /* Remove scrollbar space */
+		background: transparent; /* Optional: just make scrollbar invisible */
 	}
 	.messageInputWrapper {
 		flex: 0 1;

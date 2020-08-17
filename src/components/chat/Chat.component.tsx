@@ -3,6 +3,7 @@ import Message from '../Message/Message.component';
 import MessageInput from '../MessageInput/MessageInput.component';
 
 import './Chat.styles.scss';
+import LoadingSpinner from '../LoadingSpinner/LoadingSpinner.component';
 
 export type MessageType = {
 	_id: string;
@@ -17,6 +18,7 @@ interface Props {
 
 const Chat = ({ username }: Props) => {
 	const [messages, setmessages] = useState([]);
+	const [fetched, setfetched] = useState(false);
 	const messageRef = useRef<HTMLInputElement>(null); //ref for messageRef
 	const scrollArea = useRef<HTMLDivElement>(null); //ref for scrollArea
 
@@ -25,15 +27,18 @@ const Chat = ({ username }: Props) => {
 	}, []);
 
 	useEffect(() => {
-		if (messageRef.current !== null) {
-			messageRef.current.focus(); //focus on the messageRef after messages changed
+		if (fetched) {
+			if (messageRef.current !== null) {
+				messageRef.current.focus(); //focus on the messageRef after messages changed
+			}
+			if (scrollArea.current !== null) {
+				scrollArea.current.scrollTop = scrollArea.current.scrollHeight; //to scroll to the bottom after messages changed
+			}
 		}
-		if (scrollArea.current !== null) {
-			scrollArea.current.scrollTop = scrollArea.current.scrollHeight; //to scroll to the bottom after messages changed
-		}
-	}, [messages]);
+	}, [fetched]);
 
 	const fetchAllMessages = async () => {
+		setfetched(false);
 		const rawResponse = await fetch('https://chatty.kubernetes.doodle-test.com/api/chatty/v1.0', {
 			method: 'GET',
 			headers: {
@@ -44,14 +49,13 @@ const Chat = ({ username }: Props) => {
 		});
 		const messagesJson = await rawResponse.json();
 		setmessages(messagesJson);
+		setfetched(true);
 	};
 
 	return (
 		<div className='chat'>
 			<div ref={scrollArea} className='messagesWrapper'>
-				{messages.map((message: MessageType) => (
-					<Message key={message._id} username={username} message={message} />
-				))}
+				{!fetched ? <LoadingSpinner /> : messages.map((message: MessageType) => <Message key={message._id} username={username} message={message} />)}
 			</div>
 			<div className='messageInputWrapper'>
 				<MessageInput username={username} fetchAllMessages={fetchAllMessages} messageRef={messageRef} />
