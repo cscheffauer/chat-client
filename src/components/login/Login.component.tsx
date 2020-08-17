@@ -14,7 +14,7 @@ const Login = ({ loginUser }: Props) => {
 
 	const handleSubmit = (event: FormEvent) => {
 		event.preventDefault();
-		if (username.length > 0) loginUser(username);
+		if (username.length > 0) loginUser(username); //check if username is larger than 0 characters - to avoid empty usernames in chat
 	};
 	return (
 		<div className='login'>

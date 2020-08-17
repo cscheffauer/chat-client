@@ -1,9 +1,11 @@
 import React from 'react';
 
-interface Props {}
+interface Props {
+	username: string;
+}
 
-const Chat = (props: Props) => {
-	return <div></div>;
+const Chat = ({ username }: Props) => {
+	return <div>{username}</div>;
 };
 
 export default Chat;
