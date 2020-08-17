@@ -1,10 +1,10 @@
 .chat {
-	width: 100%;
-
 	height: 100%;
+
 	display: flex;
 	flex-flow: column;
 	.messagesWrapper {
+		width: 100%;
 		max-width: 640px;
 		margin: auto;
 		padding: 0px 24px;
@@ -12,8 +12,26 @@
 		flex: 1 1 auto;
 	}
 	.messageInputWrapper {
-		flex: 0 1 48px;
+		flex: 0 1;
+		flex-basis: auto;
+		height: 48px;
 		width: 100%;
 		background-color: #3d99d2;
+		form {
+			display: flex;
+			flex-flow: row;
+			height: 100%;
+		}
+		input {
+			margin: 8px 0px 8px 8px;
+			border-radius: 5px;
+			border: 1px solid blue;
+			font-size: 1.2em;
+			width: 100%;
+			box-sizing: border-box;
+		}
+		button {
+			margin: 8px;
+		}
 	}
 }
