@@ -23,22 +23,20 @@ const Chat = ({ username }: Props) => {
 	const scrollArea = useRef<HTMLDivElement>(null); //ref for scrollArea
 
 	useEffect(() => {
-		fetchAllMessages();
+		fetchAllMessages(true);
 	}, []);
 
-	useEffect(() => {
-		if (fetched) {
-			if (messageRef.current !== null) {
-				messageRef.current.focus(); //focus on the messageRef after messages changed
-			}
-			if (scrollArea.current !== null) {
-				scrollArea.current.scrollTop = scrollArea.current.scrollHeight; //to scroll to the bottom after messages changed
-			}
+	const setScrollAndFocus = () => {
+		if (messageRef.current !== null) {
+			messageRef.current.focus(); //focus on the messageRef after messages changed
 		}
-	}, [fetched]);
+		if (scrollArea.current !== null) {
+			scrollArea.current.scrollTop = scrollArea.current.scrollHeight; //to scroll to the bottom after messages changed
+		}
+	};
 
-	const fetchAllMessages = async () => {
-		setfetched(false);
+	const fetchAllMessages = async (showLoadingIndicator: boolean) => {
+		showLoadingIndicator && setfetched(false);
 		const rawResponse = await fetch('https://chatty.kubernetes.doodle-test.com/api/chatty/v1.0', {
 			method: 'GET',
 			headers: {
@@ -50,6 +48,7 @@ const Chat = ({ username }: Props) => {
 		const messagesJson = await rawResponse.json();
 		setmessages(messagesJson);
 		setfetched(true);
+		setScrollAndFocus();
 	};
 
 	return (

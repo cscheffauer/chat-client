@@ -2,7 +2,7 @@ import React, { FormEvent, useState } from 'react';
 
 interface Props {
 	username: string;
-	fetchAllMessages: () => void;
+	fetchAllMessages: (showLoadingIndicator: boolean) => void;
 	messageRef: React.RefObject<HTMLInputElement>;
 }
 
@@ -20,7 +20,7 @@ const MessageInput = ({ username, fetchAllMessages, messageRef }: Props) => {
 			body: JSON.stringify({ author: username, message: message }),
 		});
 		const content = await rawResponse.json();
-		if (content.author === username) fetchAllMessages();
+		if (content.author === username) fetchAllMessages(false);
 	};
 	const handleSubmit = (event: FormEvent | KeyboardEvent) => {
 		event.preventDefault();
