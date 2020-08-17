@@ -1,16 +1,19 @@
 .chat {
 	width: 100%;
-	max-width: 640px;
-	margin: auto;
-	height: 100vh;
+
+	height: 100%;
+	display: flex;
+	flex-flow: column;
 	.messagesWrapper {
+		max-width: 640px;
+		margin: auto;
 		padding: 0px 24px;
+		overflow-y: auto;
+		flex: 1 1 auto;
 	}
 	.messageInputWrapper {
-		height: 48px;
+		flex: 0 1 48px;
 		width: 100%;
-		position: absolute;
-		bottom: 0px;
-		left: 0px;
+		background-color: #3d99d2;
 	}
 }
