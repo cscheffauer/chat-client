@@ -22,6 +22,14 @@ const Chat = ({ username }: Props) => {
 	const messageRef = useRef<HTMLInputElement>(null); //ref for messageRef
 	const scrollArea = useRef<HTMLDivElement>(null); //ref for scrollArea
 
+	const Messages = () => (
+		<>
+			{messages.map((message: MessageType) => (
+				<Message key={message._id} username={username} message={message} />
+			))}
+		</>
+	);
+
 	useEffect(() => {
 		fetchAllMessages(true);
 	}, []);
@@ -54,7 +62,7 @@ const Chat = ({ username }: Props) => {
 	return (
 		<div className='chat'>
 			<div ref={scrollArea} className='messagesWrapper'>
-				{!fetched ? <LoadingSpinner /> : messages.map((message: MessageType) => <Message key={message._id} username={username} message={message} />)}
+				{fetched ? <Messages /> : <LoadingSpinner />}
 			</div>
 			<div className='messageInputWrapper'>
 				<MessageInput username={username} fetchAllMessages={fetchAllMessages} messageRef={messageRef} />
